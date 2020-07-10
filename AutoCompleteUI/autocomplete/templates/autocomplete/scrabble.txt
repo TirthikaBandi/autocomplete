@@ -1,4 +1,3 @@
-/* Downloaded from - http://www.calvin.edu/~rpruim/scrabble/ospd3.txt */
 aa
 ab
 ad

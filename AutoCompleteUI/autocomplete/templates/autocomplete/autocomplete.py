@@ -88,26 +88,3 @@ class Trie():
 		for s in self.word_list: 
 			print("A:"+s) 
 		return 1
-
-# keys to form the trie structure. 
-key = "hammer" # key for autocomplete suggestions. 
-status = ["Not found", "Found"] 
-
-# creating trie object 
-t = Trie() 
-
-f=open('scrabble.txt','r');
-keys=f.read();
-for word in keys.split():
-    t.insert(word);
-
-t.formTrie(keys) 
-
-# autocompleting the given key using 
-# our trie structure. 
-comp = t.printAutoSuggestions(key) 
-
-if comp == -1: 
-	print("No other strings found with this prefix\n") 
-elif comp == 0: 
-	print("No string found with this prefix\n") 
