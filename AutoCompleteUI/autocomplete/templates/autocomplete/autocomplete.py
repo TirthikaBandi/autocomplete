@@ -1,3 +1,8 @@
+from io import BytesIO
+from rest_framework.parsers import JSONParser
+
+import json
+
 class TrieNode(): 
 	def __init__(self): 
 		
@@ -86,5 +91,40 @@ class Trie():
 		self.suggestionsRec(node, temp_word) 
 
 		for s in self.word_list: 
-			print("A:"+s) 
+			print(s) 
 		return 1
+
+#pass the data obtained from user like in the example
+data = b'{"title":"1"}'
+data = dict(JSONParser().parse(BytesIO(data)))
+
+# keys to form the trie structure. 
+key = "hammer" # key for autocomplete suggestions. (hardcoded here but )
+status = ["Not found", "Found"] 
+
+# creating trie object 
+t = Trie() 
+
+#reading data from the txt file
+f=open('scrabble.txt','r')
+keys=f.read()
+for word in keys.split():
+    t.insert(word)
+
+#converting txt file to json
+json_words = {}
+for count in range(len(keys)):
+    json_words[word_list[count].rstrip()] = '1'
+
+json.dumps(json_words, indent=4)
+
+
+t.formTrie(keys) 
+
+# autocompleting the given key using our trie structure. 
+comp = t.printAutoSuggestions(key) 
+
+if comp == -1: 
+    print("No other strings found with this prefix\n") 
+elif comp == 0: 
+    print("No string found with this prefix\n") 
